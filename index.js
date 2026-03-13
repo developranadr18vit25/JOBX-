@@ -8,12 +8,12 @@ require("dotenv").config();
 const signUpRouter=require("./routes/signUp.js");
 const loginRouter=require("./routes/Login.js");
 const displayRouter=require("./routes/display.js");
-const addRouter=require("./routes/add.js");
+const applyRouter=require("./routes/appliedJobs.js");
 const updateRouter=require("./routes/update.js")
 const searchRouter=require("./routes/search.js");
 const adminViewRouter=require("./routes/adminView.js");
 const findJobsRouter=require("./routes/findJobs.js");
-const jobApplicationRouter=require("./routes/application.js");
+const jobApplicationRouter=require("./routes/availableJobs.js");
 const cookieParser=require("cookie-parser");
 const refreshRouter=require("./routes/refresh.js");
 
@@ -29,7 +29,7 @@ app.get("/",(req,res)=>{
 app.use("/signUp", signUpRouter);
 app.use("/login", loginRouter);
 app.use("/display", displayRouter);
-app.use("/add",addRouter);
+app.use("/apply",applyRouter);
 app.use("/update",updateRouter);
 app.use("/search", searchRouter);
 app.use("/admin", adminViewRouter);

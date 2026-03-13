@@ -1,0 +1,31 @@
+// const userDB = {
+//     content: require("../model/usersDB"),
+//     setJobs: function (data) {
+//         this.content.jobs = data;
+//     }
+// }
+
+const path=require("path");
+const fs=require("fs");
+const mongoose=require("mongoose");
+const jwt=require("jsonwebtoken");
+const { config } = require("dotenv");
+require("dotenv").config();
+
+const handleApply = (async(req, res) => {
+    const token=req.headers.authorization.split(" ")[1];
+    const decoded=jwt.verify(token,process.env.ACCESS_TOKEN_SECRET);
+    const userId=decoded.UserId;   
+    const jobId=req.body.JobId;
+
+    const appliedJob=mongoose.connection.collection("appliedJobs");
+
+    await appliedJob.insertOne({JobId:jobId , UserId:userId});
+
+    return res.json({
+        message:"Job applied Successfully"
+    });
+
+})
+
+module.exports={handleApply}
